@@ -152,9 +152,18 @@ jobs:
           echo "Prompt:"
           echo "$USER_PROMPT"
 
+          echo "--- Debug: gh copilot version ---"
+          gh copilot --version || echo "gh copilot version check failed"
+          echo "--- Debug: gh auth status ---"
+          gh auth status 2>&1 || true
+          echo "--- Debug: running gh copilot ---"
+
           gh copilot $AGENT_ARG -p "$USER_PROMPT" \
             2>&1 | tee "$OUTPUT_FILE"
           EXIT_CODE=${PIPESTATUS[0]}
+          echo "--- Debug: gh copilot exit code: $EXIT_CODE ---"
+          echo "--- Debug: OUTPUT_FILE contents ---"
+          cat "$OUTPUT_FILE" || true
 
           # Capture output for downstream jobs
           OUTPUT=$(cat "$OUTPUT_FILE")
