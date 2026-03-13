@@ -93,7 +93,7 @@ jobs:
       copilot_output: ${{ steps.run-copilot-cli.outputs.copilot_output }}
 
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.COPILOT_TOKEN || secrets.GITHUB_TOKEN }}
 
     steps:
       # ---------------------------------------------------------------
